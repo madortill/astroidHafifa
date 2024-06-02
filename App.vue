@@ -20,7 +20,7 @@ export default {
     }
   },
   components: {
-    StartScreen, 
+    StartScreen , 
     StarWars,
     PouScreen
   },
