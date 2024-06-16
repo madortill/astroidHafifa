@@ -22,8 +22,11 @@
         <source src="../assets/audio/explode.wav" type="audio/wav">
       </audio>
     </div>
-    <div class="end" v-else>
+    <div v-else>
+        <div class="end">
         פוצצתם:  {{ blownAsteroids }}
+        </div>
+        <div class="again" @click="playAgain">למשחק חוזר לחצו עליי</div>
     </div>
   </div>
 </template>
@@ -120,6 +123,16 @@ export default {
       clearInterval(this.intervalCell);
       clearInterval(this.intervalName);
       this.timesUp = true;
+    },
+    playAgain() {
+      this.timesUp = false;
+      this.blownAsteroids= 0;// Counter for blown asteroids
+      this.asteroidsOnScreen= 0;
+      this.timer = 30;
+      this.startTimer();
+      this.intervalCell = setInterval(this.chooseRandomCell, 650);
+      this.intervalName = setInterval(this.chooseRandomWord, 650);
+      
     }
   },
 };
@@ -221,4 +234,30 @@ export default {
   color: rgb(255, 208, 0);
 }
 
+.again {
+    position: absolute;
+    bottom: 14vh;
+    left: 30vw;
+    background-color: rgb(0, 0, 0);
+    width: 22vw;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 3vmax;
+     color: rgb(255, 208, 0);
+    border: 2px solid #ffe81f;
+    border-radius: 20px; /* Rounded borders */
+    animation: floatAnimation 3s infinite ease-in-out;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 </style>
